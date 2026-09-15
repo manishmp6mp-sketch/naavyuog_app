@@ -2,240 +2,566 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NaavYug - सपनों की दिशा</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NAAVYUG - सपनों की दिशा</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { background-color: #0f172a; font-family: sans-serif; }
-    .hide-scrollbar::-webkit-scrollbar { display: none; }
-    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    * { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: #0b0f19; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .active-scale:active { transform: scale(0.96); }
   </style>
 </head>
-<body class="flex justify-center items-center min-h-screen p-0 sm:p-4">
+<body class="flex justify-center items-center min-h-screen p-0 sm:p-4 text-gray-800 antialiased selection:bg-orange-500 selection:text-white">
 
-  <!-- Mobile Frame Container -->
-  <div class="w-full max-w-md bg-white min-h-screen sm:min-h-[844px] sm:rounded-3xl shadow-2xl flex flex-col relative overflow-hidden pb-16">
-    
-    <!-- Top Header -->
-    <header class="bg-gradient-to-r from-orange-500 to-amber-500 p-4 text-white flex justify-between items-center shadow-md sticky top-0 z-20">
-      <div>
-        <h1 class="text-2xl font-black tracking-wider">Naav<span class="text-blue-900">Yug</span></h1>
-        <p class="text-xs text-orange-100 flex items-center gap-1 font-medium">
-          <i class="fa-solid fa-location-dot"></i>
-          <span id="headerLoc">UP • महाराजगंज • निचलौल</span>
-        </p>
+  <!-- Mobile Screen Container -->
+  <div class="w-full max-w-[420px] bg-white min-h-screen sm:min-h-[860px] sm:max-h-[900px] sm:rounded-[40px] shadow-2xl flex flex-col relative overflow-hidden sm:border-[8px] sm:border-gray-900">
+
+    <!-- ==========================================
+         0️⃣ & 1️⃣ SCREEN: SPLASH SCREEN
+    =========================================== -->
+    <div id="screenSplash" class="absolute inset-0 bg-white z-50 flex flex-col items-center justify-between p-8">
+      <div class="flex-1 flex flex-col items-center justify-center text-center">
+        <!-- Sun & Arrow Logo Icon -->
+        <div class="relative w-32 h-32 flex items-center justify-center mb-4 animate-bounce">
+          <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-orange-400 to-amber-300 flex items-center justify-center shadow-lg shadow-orange-300/50">
+            <i class="fa-solid fa-sun text-4xl text-white"></i>
+          </div>
+          <div class="absolute bottom-2 w-28 h-6 bg-gradient-to-r from-orange-500 to-blue-600 rounded-full transform -rotate-12 flex items-center justify-end pr-2 shadow-md">
+            <i class="fa-solid fa-arrow-right text-white text-xs"></i>
+          </div>
+        </div>
+        <h1 class="text-4xl font-extrabold tracking-tight text-gray-900">NAAV<span class="text-blue-600">YUG</span></h1>
+        <p class="text-gray-500 font-semibold text-sm mt-1 tracking-widest">सपनों की दिशा</p>
       </div>
-      <button onclick="toggleModal('profileModal')" class="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center border border-white/30 text-white">
-        <i class="fa-solid fa-user"></i>
-      </button>
-    </header>
 
-    <!-- Content Sections -->
-    <main class="flex-1 overflow-y-auto hide-scrollbar">
-      
-      <!-- TAB 1: HOME / FEED -->
-      <section id="homeTab" class="p-3 space-y-4">
-        <!-- Categories Filter -->
-        <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1 text-xs font-semibold">
-          <button class="bg-orange-500 text-white px-4 py-1.5 rounded-full whitespace-nowrap shadow-sm">🔥 ट्रेंडिंग</button>
-          <button class="bg-gray-100 text-gray-700 px-4 py-1.5 rounded-full whitespace-nowrap">🌾 खेती-किसानी</button>
-          <button class="bg-gray-100 text-gray-700 px-4 py-1.5 rounded-full whitespace-nowrap">💼 स्थानीय रोज़गार</button>
-          <button class="bg-gray-100 text-gray-700 px-4 py-1.5 rounded-full whitespace-nowrap">🎭 देसी टैलेंट</button>
+      <div class="w-full space-y-3 mb-4">
+        <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+          <div class="bg-orange-500 h-full w-2/3 rounded-full animate-pulse"></div>
+        </div>
+        <button onclick="goToScreen('screenLogin')" class="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-2xl shadow-lg shadow-orange-500/30 active-scale flex items-center justify-center gap-2">
+          आगे बढ़ें <i class="fa-solid fa-arrow-right text-sm"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         2️⃣ SCREEN: LOGIN
+    =========================================== -->
+    <div id="screenLogin" class="absolute inset-0 bg-white z-40 hidden flex flex-col p-6 justify-between">
+      <div class="pt-8">
+        <div class="flex items-center gap-2 mb-8">
+          <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white font-black text-sm">N</div>
+          <span class="font-extrabold tracking-wider text-gray-900 text-lg">NAAVYUG</span>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-900">लॉग इन करें</h2>
+        <p class="text-gray-500 text-xs mt-1">अपने इलाके के हुनर, रोज़गार और बाज़ार से जुड़ने के लिए मोबाइल नंबर दर्ज करें।</p>
+
+        <div class="mt-6">
+          <label class="text-xs font-bold text-gray-700 block mb-2">मोबाइल नंबर</label>
+          <div class="flex items-center border-2 border-gray-200 rounded-2xl px-4 py-3 focus-within:border-orange-500 transition">
+            <span class="font-bold text-gray-500 text-sm mr-2 border-r pr-2">+91</span>
+            <input id="loginPhone" type="tel" maxlength="10" placeholder="98765 43210" class="w-full outline-none font-bold text-gray-800 text-sm bg-transparent">
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-3 pb-4">
+        <button onclick="sendOTP()" class="w-full py-3.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-2xl shadow-lg shadow-orange-500/25 active-scale">
+          OTP भेजें
+        </button>
+        <button onclick="skipToHome()" class="w-full py-3 text-gray-400 font-semibold text-xs active-scale">
+          Continue as Guest (सीधे देखें)
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         2️⃣.1 SCREEN: OTP VERIFICATION
+    =========================================== -->
+    <div id="screenOtp" class="absolute inset-0 bg-white z-40 hidden flex flex-col p-6 justify-between">
+      <div class="pt-8">
+        <button onclick="goToScreen('screenLogin')" class="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 mb-6">
+          <i class="fa-solid fa-arrow-left text-sm"></i>
+        </button>
+        <h2 class="text-2xl font-bold text-gray-900">OTP दर्ज करें</h2>
+        <p class="text-gray-500 text-xs mt-1">हमने <span id="displayPhone" class="font-bold text-gray-800">+91 9876543210</span> पर 4 अंकों का कोड भेजा है।</p>
+
+        <div class="flex justify-between gap-3 mt-8 max-w-xs mx-auto">
+          <input type="text" maxlength="1" value="4" class="w-14 h-14 text-center font-black text-xl border-2 border-orange-500 rounded-2xl bg-orange-50/30 outline-none">
+          <input type="text" maxlength="1" value="2" class="w-14 h-14 text-center font-black text-xl border-2 border-orange-500 rounded-2xl bg-orange-50/30 outline-none">
+          <input type="text" maxlength="1" value="8" class="w-14 h-14 text-center font-black text-xl border-2 border-orange-500 rounded-2xl bg-orange-50/30 outline-none">
+          <input type="text" maxlength="1" value="1" class="w-14 h-14 text-center font-black text-xl border-2 border-orange-500 rounded-2xl bg-orange-50/30 outline-none">
         </div>
 
-        <!-- Video Card 1 -->
-        <div class="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
-          <div class="p-3 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="w-9 h-9 rounded-full bg-orange-200 flex items-center justify-center font-bold text-orange-700">RV</div>
-              <div>
-                <h4 class="font-bold text-sm text-gray-800">राहुल वर्मा</h4>
-                <p class="text-[11px] text-gray-500">पिन: 273304 • निचलौल</p>
-              </div>
+        <p class="text-center text-xs text-gray-400 mt-6 font-medium">OTP नहीं मिला? <span class="text-orange-600 font-bold cursor-pointer">दोबारा भेजें (24s)</span></p>
+      </div>
+
+      <button onclick="goToScreen('screenProfile')" class="w-full py-3.5 bg-orange-500 text-white font-bold rounded-2xl shadow-lg shadow-orange-500/25 active-scale mb-4">
+        सत्यापित करें और आगे बढ़ें
+      </button>
+    </div>
+
+    <!-- ==========================================
+         2️⃣.2 SCREEN: PROFILE SETUP
+    =========================================== -->
+    <div id="screenProfile" class="absolute inset-0 bg-white z-40 hidden flex flex-col p-6 overflow-y-auto no-scrollbar">
+      <div class="pt-4 pb-6">
+        <h2 class="text-xl font-bold text-gray-900">लोकल पहचान सेट करें</h2>
+        <p class="text-gray-500 text-xs mt-0.5">सटीक पहचान से आपको अपने ब्लॉक व गांव की पोस्ट दिखेंगी।</p>
+
+        <!-- Avatar Selection -->
+        <div class="flex justify-center my-5">
+          <div class="relative">
+            <div class="w-20 h-20 rounded-full bg-orange-100 border-2 border-orange-400 flex items-center justify-center text-orange-600 font-bold text-2xl">
+              <i class="fa-solid fa-user"></i>
             </div>
-            <span class="text-[11px] bg-orange-100 text-orange-700 font-bold px-2 py-0.5 rounded-md">टैलेंट</span>
-          </div>
-          <div class="relative bg-black aspect-video flex items-center justify-center">
-            <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=600" class="w-full h-full object-cover opacity-80" alt="Video">
-            <button class="w-12 h-12 bg-white/80 rounded-full flex items-center justify-center text-orange-600 shadow-lg absolute">
-              <i class="fa-solid fa-play text-lg ml-0.5"></i>
+            <button class="absolute bottom-0 right-0 w-7 h-7 bg-orange-500 rounded-full text-white text-xs flex items-center justify-center border-2 border-white">
+              <i class="fa-solid fa-camera"></i>
             </button>
           </div>
-          <div class="p-3">
-            <p class="text-xs text-gray-700 font-medium">निचलौल के इस युवा ने तैयार किया देसी जुगाड़ से ऑटोमैटिक स्प्रे पंप! 🚜👏</p>
-            <div class="flex justify-between items-center mt-3 pt-2 border-t text-gray-600 text-xs font-semibold">
-              <button class="flex items-center gap-1 hover:text-red-500"><i class="fa-regular fa-heart text-base"></i> 330</button>
-              <button class="flex items-center gap-1 hover:text-blue-500"><i class="fa-regular fa-comment text-base"></i> 45</button>
-              <button class="flex items-center gap-1 hover:text-green-500 text-green-600"><i class="fa-brands fa-whatsapp text-base"></i> शेयर</button>
+        </div>
+
+        <div class="space-y-3.5 text-xs">
+          <div>
+            <label class="font-bold text-gray-700 block mb-1">पूरा नाम (Full Name)</label>
+            <input type="text" id="profName" value="राहुल वर्मा" class="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 outline-none font-semibold text-gray-800">
+          </div>
+          <div>
+            <label class="font-bold text-gray-700 block mb-1">राज्य (State)</label>
+            <input type="text" value="Uttar Pradesh" readonly class="w-full border border-gray-200 p-3 rounded-xl bg-gray-100 font-bold text-gray-700">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="font-bold text-gray-700 block mb-1">जिला (District)</label>
+              <input type="text" id="profDistrict" value="Maharajganj" class="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 font-semibold text-gray-800">
+            </div>
+            <div>
+              <label class="font-bold text-gray-700 block mb-1">ब्लॉक (Block)</label>
+              <input type="text" id="profBlock" value="Nichlaul" class="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 font-semibold text-gray-800">
             </div>
           </div>
-        </div>
-
-        <!-- Community Poll -->
-        <div class="bg-orange-50 border border-orange-200 rounded-2xl p-4">
-          <h4 class="text-xs font-bold text-orange-900 mb-2">📊 कम्युनिटी पोल: आपके गांव में सबसे ज़्यादा रोज़गार किस क्षेत्र में है?</h4>
-          <div class="space-y-1.5 text-xs font-medium">
-            <div class="bg-white p-2 rounded-lg border flex justify-between"><span>खेती / किसानी</span><span class="font-bold text-orange-600">42%</span></div>
-            <div class="bg-white p-2 rounded-lg border flex justify-between"><span>स्थानीय व्यापार / दुकान</span><span class="font-bold text-gray-600">28%</span></div>
-            <div class="bg-white p-2 rounded-lg border flex justify-between"><span>प्राइवेट / सरकारी नौकरी</span><span class="font-bold text-gray-600">18%</span></div>
+          <div>
+            <label class="font-bold text-gray-700 block mb-1">पिन कोड (Pincode)</label>
+            <input type="number" id="profPin" value="273304" class="w-full border border-gray-200 p-3 rounded-xl bg-gray-50 font-bold text-gray-800">
           </div>
         </div>
-      </section>
 
-      <!-- TAB 2: MARKETPLACE (BUY/SELL) -->
-      <section id="marketTab" class="p-3 space-y-3 hidden">
-        <div class="flex justify-between items-center">
-          <h3 class="font-bold text-gray-800 text-sm">लोकल खरीद-बिक्री बाज़ार</h3>
-          <button onclick="toggleModal('postAdModal')" class="bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 shadow">
-            <i class="fa-solid fa-plus"></i> सामान बेचें
+        <button onclick="saveProfileAndFinish()" class="w-full py-3.5 bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold rounded-2xl shadow-lg shadow-orange-500/25 active-scale mt-6">
+          Save & Continue
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         3️⃣ SCREEN: HOME (MAIN APP INTERFACE)
+    =========================================== -->
+    <div id="screenHome" class="flex-1 flex flex-col h-full bg-slate-50 relative pb-16">
+      
+      <!-- Top App Bar -->
+      <header class="bg-white px-4 pt-3 pb-2 flex items-center justify-between border-b border-gray-100 sticky top-0 z-20">
+        <!-- Notification Bell with red dot -->
+        <button class="relative w-8 h-8 flex items-center justify-center text-gray-700 active-scale">
+          <i class="fa-solid fa-bell text-lg"></i>
+          <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+        </button>
+
+        <!-- Centered Logo -->
+        <div class="flex items-center">
+          <span class="text-xl font-black tracking-tight text-gray-900">NAAV<span class="text-blue-600">YUG</span></span>
+        </div>
+
+        <!-- Search Bar Button -->
+        <button class="flex items-center gap-1.5 bg-gray-100 text-gray-500 text-xs px-3 py-1.5 rounded-full font-medium active-scale">
+          <i class="fa-solid fa-magnifying-glass text-[11px]"></i>
+          <span>Search</span>
+        </button>
+      </header>
+
+      <!-- 1️⃣ Location Bar (Landscape Banner Style) -->
+      <div class="relative bg-gradient-to-r from-amber-700 via-orange-600 to-yellow-600 text-white px-4 py-2 flex items-center justify-between text-xs font-medium shadow-inner overflow-hidden cursor-pointer" onclick="goToScreen('screenProfile')">
+        <div class="absolute inset-0 bg-black/15 backdrop-blur-[1px]"></div>
+        <div class="relative z-10 flex items-center gap-1.5 truncate">
+          <i class="fa-solid fa-location-dot text-amber-300 text-xs"></i>
+          <span id="homeLocationText" class="font-bold tracking-wide">Uttar Pradesh • Maharajganj • Nichlaul</span>
+        </div>
+        <i class="fa-solid fa-chevron-down text-[10px] relative z-10 text-amber-200 ml-1"></i>
+      </div>
+
+      <!-- Main Scrollable Content -->
+      <main class="flex-1 overflow-y-auto no-scrollbar space-y-4 pt-2 pb-6">
+
+        <!-- 2️⃣ Category Tabs (Horizontal Scroll) -->
+        <div class="flex gap-2 overflow-x-auto no-scrollbar px-4 py-1 text-xs font-bold">
+          <button class="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm whitespace-nowrap">
+            <i class="fa-solid fa-graduation-cap"></i> Education
+          </button>
+          <button class="bg-blue-50 text-blue-700 border border-blue-200 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 whitespace-nowrap">
+            <i class="fa-regular fa-newspaper"></i> News
+          </button>
+          <button class="bg-purple-50 text-purple-700 border border-purple-200 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Talent
+          </button>
+          <button class="bg-amber-50 text-amber-800 border border-amber-200 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-building-columns"></i> Govt Scheme
+          </button>
+          <button class="bg-emerald-50 text-emerald-800 border border-emerald-200 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 whitespace-nowrap">
+            <i class="fa-solid fa-seedling"></i> Farming
           </button>
         </div>
 
-        <!-- Market Item 1 -->
-        <div class="bg-white border rounded-2xl p-3 flex gap-3 shadow-sm">
-          <img src="https://images.unsplash.com/photo-1595246140625-573b715d11dc?w=200" class="w-24 h-24 rounded-xl object-cover" alt="Tractor">
-          <div class="flex-1 flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-start">
-                <h4 class="font-bold text-sm text-gray-800">महिंद्रा 575 DI ट्रैक्टर (2021)</h4>
+        <!-- 3️⃣ SHORT VIDEOS SECTION -->
+        <section class="px-4">
+          <div class="flex justify-between items-center mb-2.5">
+            <h3 class="font-bold text-gray-900 text-sm tracking-wide">Short Videos</h3>
+            <button class="text-xs font-semibold text-gray-500 hover:text-orange-600">More Videos</button>
+          </div>
+
+          <!-- 3 Vertical Cards Grid -->
+          <div class="grid grid-cols-3 gap-2">
+            
+            <!-- Short Card 1 -->
+            <div onclick="openReelsPlayer('Village Comedy', 'Rahul Verma', '330', '230', 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=500')" class="relative rounded-2xl overflow-hidden aspect-[9/14] shadow-sm bg-gray-900 cursor-pointer active-scale">
+              <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=500" class="w-full h-full object-cover opacity-85" alt="Comedy">
+              <div class="absolute top-2 right-2 text-right text-[10px] text-white font-bold leading-tight drop-shadow-md">
+                <div><i class="fa-solid fa-heart text-red-500"></i> 330</div>
+                <div><i class="fa-solid fa-comment text-gray-200"></i> 230</div>
               </div>
-              <p class="text-xs text-gray-500">पिन: 273304 • महाराजगंज</p>
-              <p class="text-orange-600 font-extrabold text-sm mt-1">₹3,40,000</p>
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-2 pt-6">
+                <p class="text-white text-[11px] font-bold leading-tight truncate">Village Comedy</p>
+                <p class="text-gray-300 text-[9px] truncate">Rahul Verma • #VillageLife</p>
+              </div>
             </div>
-            <div class="flex gap-2 mt-2">
-              <a href="tel:919999999999" class="bg-blue-600 text-white text-[11px] font-bold px-3 py-1 rounded-md flex items-center gap-1">
-                <i class="fa-solid fa-phone"></i> कॉल
-              </a>
-              <a href="https://wa.me/919999999999" class="bg-green-600 text-white text-[11px] font-bold px-3 py-1 rounded-md flex items-center gap-1">
-                <i class="fa-brands fa-whatsapp"></i> व्हाट्सएप
-              </a>
+
+            <!-- Short Card 2 -->
+            <div onclick="openReelsPlayer('Animal Care', 'Priya Sharma', '180', '190', 'https://images.unsplash.com/photo-1524024973431-2ad916746881?w=500')" class="relative rounded-2xl overflow-hidden aspect-[9/14] shadow-sm bg-gray-900 cursor-pointer active-scale">
+              <img src="https://images.unsplash.com/photo-1524024973431-2ad916746881?w=500" class="w-full h-full object-cover opacity-85" alt="Animal Care">
+              <div class="absolute top-2 right-2 text-right text-[10px] text-white font-bold leading-tight drop-shadow-md">
+                <div><i class="fa-solid fa-heart text-red-500"></i> 180</div>
+                <div><i class="fa-solid fa-comment text-gray-200"></i> 190</div>
+              </div>
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-2 pt-6">
+                <p class="text-white text-[11px] font-bold leading-tight truncate">Animal Care</p>
+                <p class="text-gray-300 text-[9px] truncate">Priya Sharma • #GoatFarming</p>
+              </div>
+            </div>
+
+            <!-- Short Card 3 -->
+            <div onclick="openReelsPlayer('Cooking Recipe', 'Ananya Patel', '340', '220', 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500')" class="relative rounded-2xl overflow-hidden aspect-[9/14] shadow-sm bg-gray-900 cursor-pointer active-scale">
+              <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=500" class="w-full h-full object-cover opacity-85" alt="Cooking Recipe">
+              <div class="absolute top-2 right-2 text-right text-[10px] text-white font-bold leading-tight drop-shadow-md">
+                <div><i class="fa-solid fa-heart text-red-500"></i> 340</div>
+                <div><i class="fa-solid fa-comment text-gray-200"></i> 220</div>
+              </div>
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-2 pt-6">
+                <p class="text-white text-[11px] font-bold leading-tight truncate">Cooking Recipe</p>
+                <p class="text-gray-300 text-[9px] truncate">Ananya Patel • #VillageFood</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 4️⃣ FULL / LONG VIDEOS SECTION -->
+        <section class="px-4">
+          <div class="flex justify-between items-center mb-2.5">
+            <h3 class="font-bold text-gray-900 text-sm tracking-wide">Full Videos</h3>
+            <button class="text-xs font-semibold text-gray-500 hover:text-orange-600">More Videos</button>
+          </div>
+
+          <!-- Long Video Card -->
+          <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+            <!-- Thumbnail with Tractor and Farmer -->
+            <div onclick="openLongPlayer()" class="relative aspect-[16/9] bg-black cursor-pointer group">
+              <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=800" class="w-full h-full object-cover group-hover:opacity-90 transition" alt="Modern Farming">
+              <span class="absolute bottom-2 right-2 bg-black/80 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">09:11</span>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-12 h-12 rounded-full bg-orange-500/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition">
+                  <i class="fa-solid fa-play ml-1"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Details -->
+            <div class="p-3">
+              <h4 class="font-bold text-xs text-gray-900 leading-snug">Modern Farming Techniques <span class="text-blue-600 font-normal">#Farm #FarmingTips</span></h4>
+              <p class="text-[10px] text-gray-400 mt-1">106K views • 5 days ago</p>
+
+              <!-- Author / Follow Row -->
+              <div class="flex items-center justify-between mt-2.5 pt-2 border-t border-gray-100">
+                <div class="flex items-center gap-1.5">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" class="w-7 h-7 rounded-full object-cover" alt="Rahul">
+                  <span class="text-xs font-bold text-gray-800">Rahul Verma</span>
+                  <i class="fa-solid fa-circle-check text-blue-500 text-[10px]"></i>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button id="btnFollow" onclick="toggleFollow()" class="bg-orange-500 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-sm active-scale">
+                    + Follow
+                  </button>
+                  <button onclick="alert('वीडियो सुरक्षित कर लिया गया!')" class="bg-gray-100 text-gray-700 text-[11px] font-bold px-2.5 py-1 rounded-full active-scale flex items-center gap-1">
+                    <i class="fa-solid fa-bookmark text-[10px] text-orange-600"></i> Save
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <!-- Market Item 2 -->
-        <div class="bg-white border rounded-2xl p-3 flex gap-3 shadow-sm">
-          <img src="https://images.unsplash.com/photo-1524024973431-2ad916746881?w=200" class="w-24 h-24 rounded-xl object-cover" alt="Goat">
-          <div class="flex-1 flex flex-col justify-between">
-            <div>
-              <h4 class="font-bold text-sm text-gray-800">देसी बरबरी बकरी (जोड़ी)</h4>
-              <p class="text-xs text-gray-500">निचलौल कस्बा</p>
-              <p class="text-orange-600 font-extrabold text-sm mt-1">₹14,500 <span class="text-[10px] text-gray-400 font-normal">(मोल-भाव संभव)</span></p>
+        <!-- 5️⃣ COMMUNITY POLL -->
+        <section class="px-4">
+          <div class="bg-white rounded-2xl border border-orange-100 p-3.5 shadow-sm relative overflow-hidden">
+            <div class="flex items-center gap-1.5 mb-1 text-orange-600">
+              <i class="fa-solid fa-chart-simple text-xs">
+                              <span class="text-xs font-bold uppercase tracking-wider">Community Poll</span>
             </div>
-            <div class="flex gap-2 mt-2">
-              <a href="tel:919999999999" class="bg-blue-600 text-white text-[11px] font-bold px-3 py-1 rounded-md flex items-center gap-1">
-                <i class="fa-solid fa-phone"></i> कॉल
-              </a>
-              <a href="https://wa.me/919999999999" class="bg-green-600 text-white text-[11px] font-bold px-3 py-1 rounded-md flex items-center gap-1">
-                <i class="fa-brands fa-whatsapp"></i> व्हाट्सएप
-              </a>
+            <h4 class="text-xs font-bold text-gray-900 mb-3 leading-snug">Where do most people in your village find employment?</h4>
+
+            <!-- 4 Options Grid -->
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <!-- Option 1 -->
+              <div onclick="selectPollOption(this, 1)" class="poll-card border-2 border-orange-400 bg-orange-50/40 rounded-xl p-2.5 cursor-pointer relative transition">
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-gray-800">Farming 🌾</span>
+                  <i class="fa-solid fa-check text-orange-600 text-xs check-icon"></i>
+                </div>
+                <div class="text-base font-black text-orange-600 mt-1">42%</div>
+                <div class="text-[9px] text-gray-400">951 votes</div>
+              </div>
+
+              <!-- Option 2 -->
+              <div onclick="selectPollOption(this, 2)" class="poll-card border border-gray-200 bg-white rounded-xl p-2.5 cursor-pointer relative transition">
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-gray-800">Business 🏪</span>
+                  <i class="fa-solid fa-check text-orange-600 text-xs check-icon hidden"></i>
+                </div>
+                <div class="text-base font-black text-emerald-600 mt-1">28%</div>
+                <div class="text-[9px] text-gray-400">632 votes</div>
+              </div>
+
+              <!-- Option 3 -->
+              <div onclick="selectPollOption(this, 3)" class="poll-card border border-gray-200 bg-white rounded-xl p-2.5 cursor-pointer relative transition">
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-gray-800">Job 💼</span>
+                  <i class="fa-solid fa-check text-orange-600 text-xs check-icon hidden"></i>
+                </div>
+                <div class="text-base font-black text-blue-600 mt-1">18%</div>
+                <div class="text-[9px] text-gray-400">412 votes</div>
+              </div>
+
+              <!-- Option 4 -->
+              <div onclick="selectPollOption(this, 4)" class="poll-card border border-gray-200 bg-white rounded-xl p-2.5 cursor-pointer relative transition">
+                <div class="flex justify-between items-start">
+                  <span class="font-bold text-gray-800">Abroad ✈️</span>
+                  <i class="fa-solid fa-check text-orange-600 text-xs check-icon hidden"></i>
+                </div>
+                <div class="text-base font-black text-indigo-600 mt-1">12%</div>
+                <div class="text-[9px] text-gray-400">254 votes</div>
+              </div>
+            </div>
+
+            <!-- Poll Meta & Vote Button -->
+            <div class="flex items-center justify-between mt-3 pt-2.5 border-t border-gray-100">
+              <span class="text-[10px] text-gray-400 font-medium">2543 votes • 16 hours left</span>
+              <button id="btnVote" onclick="submitVote()" class="bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold text-xs px-4 py-1.5 rounded-lg shadow active-scale">
+                Vote Now
+              </button>
             </div>
           </div>
+        </section>
+
+      </main>
+
+      <!-- Bottom Navigation Bar -->
+      <nav class="absolute bottom-0 inset-x-0 bg-white border-t border-gray-200 py-1.5 px-6 flex justify-between items-center z-20">
+        <!-- Home -->
+        <button class="flex flex-col items-center text-orange-500 active-scale">
+          <i class="fa-solid fa-house text-base"></i>
+          <span class="text-[9px] font-bold mt-0.5">Home</span>
+        </button>
+        <!-- Market -->
+        <button onclick="alert('बाज़ार टैब जल्द उपलब्ध होगा!')" class="flex flex-col items-center text-gray-400 active-scale">
+          <i class="fa-solid fa-store text-base"></i>
+          <span class="text-[9px] font-bold mt-0.5">Market</span>
+        </button>
+        <!-- Center Upload (+) Button -->
+        <button onclick="alert('वीडियो अपलोड करने के लिए कृपया लॉगिन जारी रखें')" class="w-12 h-12 -mt-6 rounded-full bg-gradient-to-tr from-orange-500 to-amber-400 text-white flex items-center justify-center text-xl shadow-lg shadow-orange-500/40 border-4 border-white active-scale">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <!-- Job -->
+        <button onclick="alert('रोज़गार डैशबोर्ड लोड हो रहा है...')" class="flex flex-col items-center text-gray-400 active-scale">
+          <i class="fa-solid fa-briefcase text-base"></i>
+          <span class="text-[9px] font-bold mt-0.5">Job</span>
+        </button>
+        <!-- Profile Thumbnail -->
+        <button onclick="goToScreen('screenProfile')" class="flex flex-col items-center active-scale">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" class="w-5 h-5 rounded-full object-cover border border-gray-300" alt="Me">
+          <span class="text-[9px] font-bold mt-0.5 text-gray-400">Profile</span>
+        </button>
+      </nav>
+
+    </div>
+
+    <!-- ==========================================
+         4️⃣ MODAL: SHORT REELS PLAYER
+    =========================================== -->
+    <div id="modalShortPlayer" class="absolute inset-0 bg-black z-50 hidden flex flex-col justify-between p-4 text-white">
+      <!-- Top Close / Details -->
+      <div class="flex justify-between items-center z-10 pt-2">
+        <button onclick="closeReelsPlayer()" class="w-9 h-9 bg-white/20 backdrop-blur rounded-full flex items-center justify-center">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+        <span class="text-xs font-bold bg-black/40 px-3 py-1 rounded-full border border-white/20">Reels</span>
+      </div>
+
+      <!-- Center Play Watermark -->
+      <div class="flex items-center justify-center opacity-40">
+        <i class="fa-solid fa-play text-6xl"></i>
+      </div>
+
+      <!-- Bottom Info & Right Actions -->
+      <div class="flex items-end justify-between z-10 pb-2">
+        <div class="space-y-1">
+          <p id="reelAuthor" class="font-bold text-sm">@RahulVerma</p>
+          <p id="reelTitle" class="text-xs text-gray-200">Village Comedy #VillageLife</p>
         </div>
-      </section>
-
-      <!-- TAB 3: JOBS -->
-      <section id="jobsTab" class="p-3 space-y-3 hidden">
-        <h3 class="font-bold text-gray-800 text-sm">आस-पास के काम व नौकरियां</h3>
-        <div class="bg-white border rounded-2xl p-4 shadow-sm">
-          <span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded">तुरंत ज़रूरत</span>
-          <h4 class="font-bold text-sm text-gray-800 mt-1">खाद-बीज दुकान पर हेल्पर व बिलिंग</h4>
-          <p class="text-xs text-gray-500">स्थान: मुख्य चौक, निचलौल</p>
-          <p class="text-xs font-bold text-gray-700 mt-1">वेतन: ₹9,000 - ₹11,000 / महीना</p>
-          <a href="tel:919999999999" class="inline-block mt-3 bg-blue-600 text-white text-xs font-bold px-4 py-1.5 rounded-lg">
-            संपर्क करें
-          </a>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- Bottom Navigation Bar -->
-    <nav class="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2 px-6 flex justify-between items-center z-20">
-      <button onclick="switchTab('homeTab', this)" class="nav-btn text-orange-600 flex flex-col items-center">
-        <i class="fa-solid fa-house text-lg"></i>
-        <span class="text-[10px] font-bold mt-0.5">होम</span>
-      </button>
-      <button onclick="switchTab('marketTab', this)" class="nav-btn text-gray-400 flex flex-col items-center">
-        <i class="fa-solid fa-store text-lg"></i>
-        <span class="text-[10px] font-bold mt-0.5">बाज़ार</span>
-      </button>
-      <button onclick="toggleModal('postAdModal')" class="w-11 h-11 bg-gradient-to-tr from-orange-500 to-amber-500 rounded-full flex items-center justify-center text-white shadow-lg -mt-5 border-2 border-white">
-        <i class="fa-solid fa-plus text-lg"></i>
-      </button>
-      <button onclick="switchTab('jobsTab', this)" class="nav-btn text-gray-400 flex flex-col items-center">
-        <i class="fa-solid fa-briefcase text-lg"></i>
-        <span class="text-[10px] font-bold mt-0.5">रोज़गार</span>
-      </button>
-      <button onclick="toggleModal('profileModal')" class="nav-btn text-gray-400 flex flex-col items-center">
-        <i class="fa-solid fa-id-card text-lg"></i>
-        <span class="text-[10px] font-bold mt-0.5">पहचान</span>
-      </button>
-    </nav>
-
-    <!-- Profile / Location Modal -->
-    <div id="profileModal" class="hidden absolute inset-0 bg-black/60 z-30 flex items-end">
-      <div class="bg-white w-full rounded-t-3xl p-5 space-y-4">
-        <div class="flex justify-between items-center border-b pb-2">
-          <h3 class="font-bold text-gray-800">लोकल पहचान सेट करें</h3>
-          <button onclick="toggleModal('profileModal')" class="text-gray-400 text-lg">✕</button>
-        </div>
-        <div class="space-y-3 text-xs">
-          <div>
-            <label class="font-bold text-gray-600 block mb-1">पिन कोड (Pincode)</label>
-            <input type="number" value="273304" class="w-full border p-2.5 rounded-lg bg-gray-50 font-bold text-gray-700">
-          </div>
-          <div>
-            <label class="font-bold text-gray-600 block mb-1">डाकघर / ब्लॉक</label>
-            <input type="text" value="Nichlaul (निचलौल)" class="w-full border p-2.5 rounded-lg bg-gray-50">
-          </div>
-          <div>
-            <label class="font-bold text-gray-600 block mb-1">जिला</label>
-            <input type="text" value="Maharajganj (महाराजगंज)" class="w-full border p-2.5 rounded-lg bg-gray-50">
-          </div>
-          <button onclick="toggleModal('profileModal')" class="w-full bg-orange-500 text-white font-bold py-2.5 rounded-xl shadow">
-            पहचान सुरक्षित करें
+        <div class="flex flex-col items-center gap-4 text-xs">
+          <button onclick="toggleLike(this)" class="flex flex-col items-center gap-1">
+            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+            <span id="reelLikes">330</span>
+          </button>
+          <button onclick="alert('कमेंट बॉक्स खुल रहा है...')" class="flex flex-col items-center gap-1">
+            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg">
+              <i class="fa-solid fa-comment"></i>
+            </div>
+            <span id="reelComments">230</span>
+          </button>
+          <button onclick="navigator.share ? navigator.share({title: 'NaavYug Video', url: window.location.href}) : alert('लिंक कॉपी हो गया!')" class="flex flex-col items-center gap-1">
+            <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-lg">
+              <i class="fa-solid fa-share"></i>
+            </div>
+            <span>Share</span>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Post Ad Modal -->
-    <div id="postAdModal" class="hidden absolute inset-0 bg-black/60 z-30 flex items-end">
-      <div class="bg-white w-full rounded-t-3xl p-5 space-y-3">
-        <div class="flex justify-between items-center border-b pb-2">
-          <h3 class="font-bold text-gray-800">बाज़ार में सामान बेचें</h3>
-          <button onclick="toggleModal('postAdModal')" class="text-gray-400 text-lg">✕</button>
+    <!-- ==========================================
+         5️⃣ MODAL: LONG VIDEO PLAYER
+    =========================================== -->
+    <div id="modalLongPlayer" class="absolute inset-0 bg-black/95 z-50 hidden flex flex-col text-white">
+      <!-- Player Area -->
+      <div class="relative w-full aspect-video bg-black flex items-center justify-center">
+        <button onclick="closeLongPlayer()" class="absolute top-3 left-3 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center z-10">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=800" class="w-full h-full object-cover opacity-60" alt="Video">
+        <!-- Play Controls -->
+        <div class="absolute inset-0 flex items-center justify-center gap-8 text-2xl">
+          <button onclick="alert('-10 Seconds')"><i class="fa-solid fa-rotate-left"></i></button>
+          <button class="w-14 h-14 rounded-full bg-orange-500 flex items-center justify-center text-xl shadow-lg"><i class="fa-solid fa-pause"></i></button>
+          <button onclick="alert('+10 Seconds')"><i class="fa-solid fa-rotate-right"></i></button>
         </div>
-        <div class="space-y-2 text-xs">
-          <input type="text" placeholder="सामान का नाम (उदा: ट्रैक्टर, बाइक, अनाज)" class="w-full border p-2 rounded-lg">
-          <input type="number" placeholder="कीमत (₹)" class="w-full border p-2 rounded-lg">
-          <input type="tel" placeholder="कॉल / व्हाट्सएप नंबर" class="w-full border p-2 rounded-lg">
-          <button onclick="alert('विज्ञापन सफलतापूर्वक पोस्ट हो गया!'); toggleModal('postAdModal');" class="w-full bg-green-600 text-white font-bold py-2.5 rounded-xl">
-            विज्ञापन लाइव करें
-          </button>
+      </div>
+
+      <!-- Description Area -->
+      <div class="p-4 flex-1 overflow-y-auto space-y-3">
+        <h3 class="font-bold text-sm">Modern Farming Techniques #Farm #FarmingTips</h3>
+        <p class="text-xs text-gray-400">106K views • 5 days ago • Maharajganj</p>
+
+        <!-- Actions -->
+        <div class="flex justify-around py-3 border-y border-white/10 text-xs">
+          <button onclick="this.classList.toggle('text-red-500')" class="flex flex-col items-center gap-1"><i class="fa-solid fa-thumbs-up text-base"></i> Like</button>
+          <button onclick="alert('टिप्पणी जोड़ें')" class="flex flex-col items-center gap-1"><i class="fa-solid fa-comment text-base"></i> Comment</button>
+          <button onclick="alert('शेयर लिंक तैयार है!')" class="flex flex-col items-center gap-1"><i class="fa-solid fa-share-nodes text-base"></i> Share</button>
+          <button onclick="alert('सुरक्षित किया गया')" class="flex flex-col items-center gap-1 text-orange-400"><i class="fa-solid fa-bookmark text-base"></i> Saved</button>
         </div>
       </div>
     </div>
 
   </div>
 
+  <!-- JavaScript Controls & State Handling -->
   <script>
-    function switchTab(tabId, el) {
-      document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
-      document.getElementById(tabId).classList.remove('hidden');
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('text-orange-600');
-        btn.classList.add('text-gray-400');
-      });
-      el.classList.add('text-orange-600');
-      el.classList.remove('text-gray-400');
+    function goToScreen(screenId) {
+      document.querySelectorAll('#screenSplash, #screenLogin, #screenOtp, #screenProfile').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById(screenId);
+      if (target) target.classList.remove('hidden');
     }
-    function toggleModal(id) {
-      document.getElementById(id).classList.toggle('hidden');
+
+    function sendOTP() {
+      const phone = document.getElementById('loginPhone').value || '9876543210';
+      document.getElementById('displayPhone').innerText = '+91 ' + phone;
+      goToScreen('screenOtp');
+    }
+
+    function skipToHome() {
+      document.querySelectorAll('#screenSplash, #screenLogin, #screenOtp, #screenProfile').forEach(el => el.classList.add('hidden'));
+    }
+
+    function saveProfileAndFinish() {
+      const dist = document.getElementById('profDistrict').value || 'Maharajganj';
+      const blk = document.getElementById('profBlock').value || 'Nichlaul';
+      document.getElementById('homeLocationText').innerText = `Uttar Pradesh • ${dist} • ${blk}`;
+      skipToHome();
+    }
+
+    function toggleFollow() {
+      const btn = document.getElementById('btnFollow');
+      if (btn.innerText === '+ Follow') {
+        btn.innerText = 'Following';
+        btn.className = 'bg-gray-200 text-gray-800 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm';
+      } else {
+        btn.innerText = '+ Follow';
+        btn.className = 'bg-orange-500 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-sm active-scale';
+      }
+    }
+
+    function selectPollOption(el, id) {
+      document.querySelectorAll('.poll-card').forEach(card => {
+        card.classList.remove('border-orange-400', 'bg-orange-50/40');
+        card.classList.add('border-gray-200', 'bg-white');
+        card.querySelector('.check-icon').classList.add('hidden');
+      });
+      el.classList.remove('border-gray-200', 'bg-white');
+      el.classList.add('border-orange-400', 'bg-orange-50/40');
+      el.querySelector('.check-icon').classList.remove('hidden');
+    }
+
+    function submitVote() {
+      const btn = document.getElementById('btnVote');
+      btn.innerText = 'Voted ✓';
+      btn.className = 'bg-emerald-600 text-white font-bold text-xs px-4 py-1.5 rounded-lg shadow';
+      alert('आपका वोट दर्ज कर लिया गया है!');
+    }
+
+    function openReelsPlayer(title, author, likes, comments, bgImg) {
+      document.getElementById('reelTitle').innerText = title + ' #VillageLife';
+      document.getElementById('reelAuthor').innerText = '@' + author.replace(' ', '');
+      document.getElementById('reelLikes').innerText = likes;
+      document.getElementById('reelComments').innerText = comments;
+      document.getElementById('modalShortPlayer').classList.remove('hidden');
+    }
+
+    function closeReelsPlayer() {
+      document.getElementById('modalShortPlayer').classList.add('hidden');
+    }
+
+    function toggleLike(btn) {
+      btn.classList.toggle('text-red-500');
+    }
+
+    function openLongPlayer() {
+      document.getElementById('modalLongPlayer').classList.remove('hidden');
+    }
+
+    function closeLongPlayer() {
+      document.getElementById('modalLongPlayer').classList.add('hidden');
     }
   </script>
 </body>
-  </html>
-                                                                                                                                               
+</html>
